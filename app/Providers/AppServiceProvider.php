@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Wenslijst\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
