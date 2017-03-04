@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Wenslijst\Pages\WenslijstPage;
+
+Route::any('/', function () {
+    return new WenslijstPage();
 });
