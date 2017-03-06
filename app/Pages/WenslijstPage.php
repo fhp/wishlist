@@ -5,7 +5,7 @@ namespace Wenslijst\Pages;
 use Unicorn\UI\Base\Widget;
 use Unicorn\UI\Bootstrap\ModalForm;
 use Unicorn\UI\Bootstrap\OrmTable;
-use Unicorn\UI\HTML\Header;
+use Unicorn\UI\HTML\Link;
 use Wenslijst\Forms\DeletePresentForm;
 use Wenslijst\Present;
 use Wenslijst\Forms\NewPresentForm;
@@ -19,8 +19,6 @@ class WenslijstPage extends WenslijstLayout
 		
 		$this->setTitle("Wenslijst");
 		
-		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
-		
 		$this->addChild($this->presentsList());
 		$this->addChild($this->newPresentForm());
 	}
@@ -28,7 +26,15 @@ class WenslijstPage extends WenslijstLayout
 	private function presentsList(): Widget
 	{
 		$table = new OrmTable(Present::all());
-		$table->addColumnFunction("Cadeau", function(Present $present) { return $present->name; });
+		$table->addColumnFunction("Cadeau", function(Present $present) {
+			if($present->url === null) {
+				return $present->name;
+			} else {
+				$link = new Link($present->url);
+				$link->addText($present->name);
+				return $link;
+			}
+		});
 		$table->addColumnFunction("Voor wie?", function(Present $present) { return $present->ontvanger; });
 		$table->addColumnFunction("Details", function(Present $present) { return $present->omschrijving; });
 		$table->addColumnFunction("Claim", function(Present $present) {

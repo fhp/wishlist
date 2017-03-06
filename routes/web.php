@@ -15,4 +15,5 @@ use Wenslijst\Pages\WenslijstPage;
 
 Route::any('/', function () {
     return new WenslijstPage();
-});
+})->name('home');
+

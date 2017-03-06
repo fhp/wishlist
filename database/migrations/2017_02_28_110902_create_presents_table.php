@@ -18,6 +18,7 @@ class CreatePresentsTable extends Migration
             $table->string("name");
             $table->string("ontvanger");
             $table->string("omschrijving");
+            $table->string("url")->nullable();
             $table->ipAddress("ip")->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();

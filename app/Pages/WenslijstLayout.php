@@ -4,6 +4,7 @@ namespace Wenslijst\Pages;
 
 use Unicorn\UI\Base\HtmlElement;
 use Unicorn\UI\Base\HtmlPage;
+use Unicorn\UI\HTML\Header;
 
 class WenslijstLayout extends HtmlPage
 {
@@ -21,6 +22,8 @@ class WenslijstLayout extends HtmlPage
 		$this->addJavascript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
 		$this->addStylesheet("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 		$this->addStylesheet("test.css");
+		
+		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
 	}
 	
 	protected function setTitle(string $title): void

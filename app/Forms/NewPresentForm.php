@@ -18,6 +18,9 @@ class NewPresentForm extends CsrfProtectedForm
 	/** @var TextInput */
 	private $omschrijving;
 	
+	/** @var TextInput */
+	private $url;
+	
 	/** @var SubmitButton */
 	private $button;
 	
@@ -45,6 +48,9 @@ class NewPresentForm extends CsrfProtectedForm
 		$this->ensure(new InputNotEmpty($this->omschrijving, "Geen een omschrijving op"));
 		$this->addInput($this->omschrijving);
 		
+		$this->url = new TextInput("url", "Link");
+		$this->addInput($this->url);
+		
 		$this->button = new SubmitButton("submit", "Submit");
 		$this->addInput($this->button);
 	}
@@ -55,6 +61,7 @@ class NewPresentForm extends CsrfProtectedForm
 		$present->name = $this->name->value();
 		$present->ontvanger = $this->ontvanger->value();
 		$present->omschrijving = $this->omschrijving->value();
+		$present->url = ($this->url->value() == "" ? null : $this->url->value());
 		$present->save();
 	}
 }
