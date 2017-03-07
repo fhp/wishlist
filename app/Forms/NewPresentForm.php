@@ -2,6 +2,7 @@
 
 namespace Wenslijst\Forms;
 
+use Illuminate\Support\Facades\Auth;
 use Unicorn\Forms\Conditions\InputNotEmpty;
 use Unicorn\Forms\TextInput;
 use Unicorn\Forms\SubmitButton;
@@ -26,7 +27,7 @@ class NewPresentForm extends CsrfProtectedForm
 	
 	public function checkAccess(): bool
 	{
-		return true;
+		return Auth::check();
 	}
 	
 	public function title(): string

@@ -2,8 +2,12 @@
 
 namespace Wenslijst\Pages;
 
+use Illuminate\Support\Facades\Auth;
 use Unicorn\UI\Base\HtmlElement;
 use Unicorn\UI\Base\HtmlPage;
+use Unicorn\UI\Bootstrap\Button;
+use Unicorn\UI\Bootstrap\LinkButton;
+use Unicorn\UI\Bootstrap\Navbar;
 use Unicorn\UI\HTML\Header;
 
 class WenslijstLayout extends HtmlPage
@@ -15,8 +19,16 @@ class WenslijstLayout extends HtmlPage
 		
 		parent::__construct($content);
 		
-		$body = $this->body();
-		$body->addChild($content);
+		$bar = new Navbar();
+		$bar->brandLink("Wenslijst", route("home"));
+		if(Auth::check()) {
+			$bar->addButton(new LinkButton(route("logout"), "logout"), true);
+		} else {
+			$bar->addButton(new LinkButton(route("login"), "login"), true);
+		}
+		$this->body()->addChild($bar);
+		
+		$this->body()->addChild($content);
 		
 		$this->addJavascript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
 		$this->addJavascript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
