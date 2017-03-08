@@ -31,11 +31,11 @@ class LoginForm extends CsrfProtectedForm
 	public function form(): void
 	{
 		$this->username = new TextInput("username", "Gebruikersnaam");
-		$this->ensure(new InputNotEmpty($this->username, "Geen een gebruikersnaam op."));
+		$this->ensure(new InputNotEmpty($this->username, "Geef een gebruikersnaam op."));
 		$this->addInput($this->username);
 		
 		$this->password = new PasswordInput("password", "Wachtwoord");
-		$this->ensure(new InputNotEmpty($this->password, "Geen een wachtwoord op."));
+		$this->ensure(new InputNotEmpty($this->password, "Geef een wachtwoord op."));
 		$this->addInput($this->password);
 		
 		$this->setSubmitButton(new SubmitButton("submit", "Submit"));
