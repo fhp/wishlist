@@ -31,6 +31,7 @@ class WenslijstPage extends WenslijstLayout
 				return $present->name;
 			} else {
 				$link = new Link($present->url);
+				$link->openInNewPage();
 				$link->addText($present->name);
 				return $link;
 			}
