@@ -38,15 +38,14 @@ class NewPresentForm extends CsrfProtectedForm
 	public function form(): void
 	{
 		$this->name = new TextInput("name", "Cadeau");
-		$this->ensure(new InputNotEmpty($this->name, "Geen een naam op"));
+		$this->ensure(new InputNotEmpty($this->name, "Geef een naam op"));
 		$this->addInput($this->name);
 		
 		$this->ontvanger = new TextInput("ontvanger", "Ontvanger");
-		$this->ensure(new InputNotEmpty($this->ontvanger, "Geen een ontvanger op"));
+		$this->ensure(new InputNotEmpty($this->ontvanger, "Geef een ontvanger op"));
 		$this->addInput($this->ontvanger);
 		
 		$this->omschrijving = new TextInput("omschrijving", "Omschrijving");
-		$this->ensure(new InputNotEmpty($this->omschrijving, "Geen een omschrijving op"));
 		$this->addInput($this->omschrijving);
 		
 		$this->url = new TextInput("url", "Link");
