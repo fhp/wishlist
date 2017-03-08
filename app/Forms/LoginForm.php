@@ -43,7 +43,8 @@ class LoginForm extends CsrfProtectedForm
 	
 	public function handle(): void
 	{
-		if (Auth::attempt(['email' => $this->username->value(), 'password' => $this->password->value()])) {
+		if (Auth::attempt(['email' => $this->username->value(), 'password' => $this->password->value()])
+		 || Auth::attempt(['name' => $this->username->value(), 'password' => $this->password->value()])) {
 			throw new PageFlowException(redirect()->route("home"));
 		} else {
 			$this->username->error("Deze gebruikersnaam en wachtwoord combinatie is incorrect.");
