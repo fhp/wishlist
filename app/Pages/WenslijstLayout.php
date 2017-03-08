@@ -4,13 +4,13 @@ namespace Wenslijst\Pages;
 
 use Illuminate\Support\Facades\Auth;
 use Unicorn\UI\Base\HtmlElement;
-use Unicorn\UI\Base\HtmlPage;
-use Unicorn\UI\Bootstrap\Button;
+use Unicorn\UI\Bootstrap\BootstrapHtmlPage;
 use Unicorn\UI\Bootstrap\LinkButton;
 use Unicorn\UI\Bootstrap\Navbar;
 use Unicorn\UI\HTML\Header;
+use Unicorn\UI\HTML\Image;
 
-class WenslijstLayout extends HtmlPage
+class WenslijstLayout extends BootstrapHtmlPage
 {
 	function __construct()
 	{
@@ -20,7 +20,7 @@ class WenslijstLayout extends HtmlPage
 		parent::__construct($content);
 		
 		$bar = new Navbar();
-		$bar->brandLink("Wenslijst", route("home"));
+		$bar->brandLink(new Image("img/logo.png"), route("home"));
 		if(Auth::check()) {
 			$bar->addButton(new LinkButton(route("logout"), "logout"), true);
 		} else {
@@ -30,10 +30,7 @@ class WenslijstLayout extends HtmlPage
 		
 		$this->body()->addChild($content);
 		
-		$this->addJavascript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
-		$this->addJavascript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
-		$this->addStylesheet("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
-		$this->addStylesheet("test.css");
+		$this->addStylesheet("css/wenslijst.css");
 		
 		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
 	}
