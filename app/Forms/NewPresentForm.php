@@ -8,7 +8,7 @@ use Unicorn\Forms\TextInput;
 use Unicorn\Forms\SubmitButton;
 use Wenslijst\Present;
 
-class NewPresentForm extends CsrfProtectedForm
+class NewPresentForm extends LaravelForm
 {
 	/** @var TextInput */
 	private $name;

@@ -7,7 +7,7 @@ use Unicorn\Forms\SubmitButton;
 use Unicorn\UI\HTML\Paragraph;
 use Wenslijst\Present;
 
-class DeletePresentForm extends CsrfProtectedForm
+class DeletePresentForm extends LaravelForm
 {
 	/** @var SubmitButton */
 	private $button;
@@ -15,10 +15,10 @@ class DeletePresentForm extends CsrfProtectedForm
 	/** @var Present */
 	private $present;
 	
-	public function __construct(Present $present, $action, $method = "POST", $encoding = "multipart/form-data", $charset = "UTF-8")
+	public function __construct(Present $present, $action = null, $method = "POST", $encoding = "multipart/form-data", $charset = "UTF-8")
 	{
-		$this->present = $present;
 		parent::__construct(str_replace("\\", "-", self::class) . "-" . $present->id, $action, $method, $encoding, $charset);
+		$this->present = $present;
 	}
 	
 	public function checkAccess(): bool

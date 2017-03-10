@@ -3,10 +3,13 @@
 namespace Wenslijst\Pages;
 
 use Unicorn\UI\Base\Widget;
+use Unicorn\UI\Bootstrap\Alert;
+use Unicorn\UI\Bootstrap\ContextualStyle;
 use Unicorn\UI\Bootstrap\ModalForm;
 use Unicorn\UI\Bootstrap\OrmTable;
 use Unicorn\UI\HTML\Link;
 use Wenslijst\Forms\DeletePresentForm;
+use Wenslijst\Forms\RSVPForm;
 use Wenslijst\Present;
 use Wenslijst\Forms\NewPresentForm;
 use Wenslijst\UI\PresentIcon;
@@ -19,6 +22,8 @@ class WenslijstPage extends WenslijstLayout
 		
 		$this->setTitle("Wenslijst");
 		
+		$this->addChild(new RSVPForm("rsvp"));
+		$this->addChild(new Alert("Uitleg:", "Hieronder staat een lijst met cadeau's die wij leuk vinden, die je als inspiratie kan gebruiken. Als er iets tussenstaat wat je wilt geven, claim deze dan door op de knop rechts te klikken zodat anderen dat ook niet kopen.", ContextualStyle::info()));
 		$this->addChild($this->presentsList());
 		$this->addChild($this->newPresentForm());
 	}
@@ -39,8 +44,8 @@ class WenslijstPage extends WenslijstLayout
 		$table->addColumnFunction("Voor wie?", function(Present $present) { return $present->ontvanger; });
 		$table->addColumnFunction("Details", function(Present $present) { return $present->omschrijving; });
 		$table->addColumnFunction("Claim", function(Present $present) {
-			$modal = new ModalForm(new DeletePresentForm($present, ""));
-			$modal->includeToggleButton(null, new PresentIcon());
+			$modal = new ModalForm(new DeletePresentForm($present));
+			$modal->includeToggleButton("Deze claim ik", new PresentIcon());
 			$modal->addCloseButton("Ik denk er nog even over na");
 			return $modal;
 		});
@@ -50,6 +55,6 @@ class WenslijstPage extends WenslijstLayout
 	
 	private function newPresentForm(): Widget
 	{
-		return new NewPresentForm("newPresent", "");
+		return new NewPresentForm("newPresent");
 	}
 }

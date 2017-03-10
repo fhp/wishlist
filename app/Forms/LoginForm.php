@@ -10,7 +10,7 @@ use Unicorn\Forms\SubmitButton;
 use Unicorn\Forms\TextInput;
 use Wenslijst\Http\PageFlowException;
 
-class LoginForm extends CsrfProtectedForm
+class LoginForm extends LaravelForm
 {
 	/** @var TextInput */
 	private $username;

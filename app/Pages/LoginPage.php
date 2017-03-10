@@ -17,6 +17,6 @@ class LoginPage extends WenslijstLayout
 	
 	private function loginForm()
 	{
-		return new LoginForm("login", route("login"));
+		return new LoginForm("login");
 	}
 }
