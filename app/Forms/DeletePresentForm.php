@@ -35,7 +35,7 @@ class DeletePresentForm extends LaravelForm
 	{
 		$this->addChild(new Paragraph("Ga je dit cadeau aanschaffen? Claim hem dan zodat anderen hem niet meer zien."));
 		
-		$this->button = new SubmitButton("submit", "Dibs!");
+		$this->button = new SubmitButton($this, "submit", "Dibs!");
 		$this->setSubmitButton($this->button);
 	}
 	

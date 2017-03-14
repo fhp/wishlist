@@ -30,15 +30,15 @@ class LoginForm extends LaravelForm
 	
 	public function form(): void
 	{
-		$this->username = new TextInput("username", "Gebruikersnaam");
+		$this->username = new TextInput($this, "username", "Gebruikersnaam");
 		$this->ensure(new InputNotEmpty($this->username, "Geef een gebruikersnaam op."));
 		$this->addInput($this->username);
 		
-		$this->password = new PasswordInput("password", "Wachtwoord");
+		$this->password = new PasswordInput($this, "password", "Wachtwoord");
 		$this->ensure(new InputNotEmpty($this->password, "Geef een wachtwoord op."));
 		$this->addInput($this->password);
 		
-		$this->setSubmitButton(new SubmitButton("submit", "Submit"));
+		$this->setSubmitButton(new SubmitButton($this, "submit", "Submit"));
 	}
 	
 	public function handle(): void
