@@ -15,9 +15,9 @@ class DeletePresentForm extends LaravelForm
 	/** @var Present */
 	private $present;
 	
-	public function __construct(Present $present, $action = null, $method = "POST", $encoding = "multipart/form-data", $charset = "UTF-8")
+	public function __construct(Present $present, $action = null)
 	{
-		parent::__construct(str_replace("\\", "-", self::class) . "-" . $present->id, $action, $method, $encoding, $charset);
+		parent::__construct(str_replace("\\", "-", self::class) . "-" . $present->id, $action);
 		$this->present = $present;
 	}
 	
