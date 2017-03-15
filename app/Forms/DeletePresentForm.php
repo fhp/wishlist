@@ -17,8 +17,8 @@ class DeletePresentForm extends LaravelForm
 	
 	public function __construct(Present $present, $action = null)
 	{
-		parent::__construct(str_replace("\\", "-", self::class) . "-" . $present->id, $action);
 		$this->present = $present;
+		parent::__construct(str_replace("\\", "-", self::class) . "-" . $present->id, $action);
 	}
 	
 	public function checkAccess(): bool
