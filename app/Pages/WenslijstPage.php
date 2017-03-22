@@ -22,7 +22,7 @@ class WenslijstPage extends WenslijstLayout
 	{
 		parent::__construct();
 		
-		$this->setTitle("Wenslijst");
+		$this->setTitle("RSVP & Wenslijst");
 		
 		$rsvpForm = new RSVPForm("rsvp");
 		if($rsvpForm->checkAccess()) {
