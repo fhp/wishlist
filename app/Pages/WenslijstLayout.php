@@ -9,7 +9,6 @@ use Unicorn\UI\Base\HtmlElement;
 use Unicorn\UI\Bootstrap\BootstrapHtmlPage;
 use Unicorn\UI\Bootstrap\LinkButton;
 use Unicorn\UI\Bootstrap\Navbar;
-use Unicorn\UI\HTML\Header;
 use Unicorn\UI\HTML\Image;
 
 abstract class WenslijstLayout extends BootstrapHtmlPage
@@ -34,8 +33,6 @@ abstract class WenslijstLayout extends BootstrapHtmlPage
 		$this->body()->addChild($content);
 		
 		$this->addStylesheet("css/wenslijst.css");
-		
-		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
 		
 		if(($message = Session::get("message")) !== null) {
 			$content->addChild(new HtmlBlob($message));

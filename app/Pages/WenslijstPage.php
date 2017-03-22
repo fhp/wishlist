@@ -2,11 +2,13 @@
 
 namespace Wenslijst\Pages;
 
+use Unicorn\UI\Base\HtmlElement;
 use Unicorn\UI\Base\Widget;
 use Unicorn\UI\Bootstrap\Alert;
 use Unicorn\UI\Bootstrap\ContextualStyle;
 use Unicorn\UI\Bootstrap\ModalForm;
 use Unicorn\UI\Bootstrap\OrmTable;
+use Unicorn\UI\HTML\Header;
 use Unicorn\UI\HTML\Link;
 use Wenslijst\Forms\DeletePresentForm;
 use Wenslijst\Forms\RSVPForm;
@@ -22,7 +24,14 @@ class WenslijstPage extends WenslijstLayout
 		
 		$this->setTitle("Wenslijst");
 		
-		$this->addChild(new RSVPForm("rsvp"));
+		$rsvpForm = new RSVPForm("rsvp");
+		if($rsvpForm->checkAccess()) {
+			$this->addChild(new Header("Ben je er bij?", "h1", "Vinden we fijn om te weten :)"));
+			$this->addChild($rsvpForm);
+			$this->addChild(new HtmlElement("hr"));
+		}
+		
+		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
 		$this->addChild(new Alert("Uitleg:", "Hieronder staat een lijst met cadeau's die wij leuk vinden, die je als inspiratie kan gebruiken. Als er iets tussenstaat wat je wilt geven, claim deze dan door op de knop rechts te klikken zodat anderen dat ook niet kopen.", ContextualStyle::info()));
 		$this->addChild($this->presentsList());
 		$this->addChild($this->newPresentForm());

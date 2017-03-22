@@ -10,3 +10,7 @@
 	background: linear-gradient(to right, rgba(209,255,82,1) 0%, rgba(80,198,6,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ff52', endColorstr='#50c606', GradientType=1 );
 }
+
+.navbar .navbar-brand {
+	height: 105px;
+}

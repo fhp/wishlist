@@ -28,6 +28,12 @@ class RSVPForm extends LaravelForm
 	/** @var TextInput */
 	private $dieet;
 	
+	public function __construct($id, $action = null)
+	{
+		parent::__construct($id, $action);
+		$this->noTitle();
+	}
+	
 	public function checkAccess(): bool
 	{
 		return Visitor::where("ip", Request::ip())->first() === null;

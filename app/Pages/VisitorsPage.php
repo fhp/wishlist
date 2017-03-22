@@ -5,6 +5,7 @@ namespace Wenslijst\Pages;
 use Unicorn\UI\Base\Widget;
 use Unicorn\UI\Bootstrap\BoolCheck;
 use Unicorn\UI\Bootstrap\OrmTable;
+use Unicorn\UI\HTML\Header;
 use Wenslijst\Visitor;
 
 class VisitorsPage extends WenslijstLayout
@@ -15,6 +16,7 @@ class VisitorsPage extends WenslijstLayout
 		
 		$this->setTitle("Bezoekers");
 		
+		$this->addChild(new Header("Bezoekers", "h1", "Wie komen er allemaal?"));
 		$this->addChild($this->visitorsList());
 	}
 	
