@@ -26,7 +26,9 @@ class WenslijstPage extends WenslijstLayout
 		
 		$rsvpForm = new RSVPForm("rsvp");
 		if($rsvpForm->checkAccess()) {
-			$this->addChild(new Header("Ben je er bij?", "h1", "Vinden we fijn om te weten :)"));
+			$legend = new HtmlElement("legend");
+			$legend->addChild(new Header("Ben je er bij?", "h1", "Vinden we fijn om te weten :)"));
+			$this->addChild($legend);
 			$this->addChild($rsvpForm);
 			$this->addChild(new HtmlElement("hr"));
 		}
@@ -39,7 +41,11 @@ class WenslijstPage extends WenslijstLayout
 	
 	private function presentsList(): Widget
 	{
-		$table = new OrmTable(Present::all());
+		$presents = Present::all();
+		if($presents->count() == 0) {
+			return new Alert("Helaas:", "Momenteel is de lijst met ideeen leeg :( Het is mogelijk dat een grapjas alles heeft geclaimed, probeer het binnenkort nog eens of neem rechtstreeks contact met ons op.", ContextualStyle::warning());
+		}
+		$table = new OrmTable($presents);
 		$table->addColumnFunction("Cadeau", function(Present $present) {
 			if($present->url === null) {
 				return $present->name;
