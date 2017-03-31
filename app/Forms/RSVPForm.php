@@ -2,6 +2,7 @@
 
 namespace Wenslijst\Forms;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Session;
 use Unicorn\Forms\RadioInput;
@@ -36,7 +37,7 @@ class RSVPForm extends LaravelForm
 	
 	public function checkAccess(): bool
 	{
-		return Visitor::where("ip", Request::ip())->first() === null;
+		return Visitor::where("ip", Request::ip())->first() === null || Auth::check();
 	}
 	
 	public function title(): string
