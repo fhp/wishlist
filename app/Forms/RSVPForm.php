@@ -60,11 +60,11 @@ class RSVPForm extends LaravelForm
 		$this->eten = new RadioInput($this, "eten", "Eet je mee?");
 		$this->eten->addOption("ja", "Ja");
 		$this->eten->addOption("nee", "Nee");
-		$this->eten->required("Geef aan of je mee eet.");
+		$this->eten->requiredIf($this->aanwezig, "ja", "Geef aan of je mee eet.");
 		$this->addInput($this->eten);
 		
 		$this->aantalPersonen = new TextInput($this, "aantalPersonen", "Met hoeveel personen kom je?");
-		$this->aantalPersonen->required("Geef aan met hoeveel personen je komt.");
+		$this->aantalPersonen->requiredIf($this->aanwezig, "ja", "Geef aan met hoeveel personen je komt.");
 		$this->addInput($this->aantalPersonen);
 		
 		$this->dieet = new TextInput($this, "dieet", "Heb je een speciaal dieet of allergieën?");

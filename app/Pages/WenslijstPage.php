@@ -10,6 +10,7 @@ use Unicorn\UI\Bootstrap\ModalForm;
 use Unicorn\UI\Bootstrap\OrmTable;
 use Unicorn\UI\HTML\Header;
 use Unicorn\UI\HTML\Link;
+use Unicorn\UI\HTML\Paragraph;
 use Wenslijst\Forms\DeletePresentForm;
 use Wenslijst\Forms\RSVPForm;
 use Wenslijst\Present;
@@ -36,6 +37,7 @@ class WenslijstPage extends WenslijstLayout
 		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
 		$this->addChild(new Alert("Uitleg:", "Hieronder staat een lijst met cadeau's die wij leuk vinden, die je als inspiratie kan gebruiken. Als er iets tussenstaat wat je wilt geven, claim deze dan door op de knop rechts te klikken zodat anderen dat ook niet kopen.", ContextualStyle::info()));
 		$this->addChild($this->presentsList());
+		$this->addChild(new Paragraph("Kun je hiertussen niks vinden, dan maak je ons ook nog blij met een cadeaubon voor bol.com, hema, kruidvat of de campingwinkel in Eindhoven."));
 		$this->addChild($this->newPresentForm());
 	}
 	
