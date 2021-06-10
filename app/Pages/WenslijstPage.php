@@ -11,11 +11,10 @@ use Unicorn\UI\Bootstrap\OrmTable;
 use Unicorn\UI\HTML\Header;
 use Unicorn\UI\HTML\Link;
 use Unicorn\UI\HTML\Paragraph;
-use Wenslijst\Forms\DeletePresentForm;
-use Wenslijst\Forms\RSVPForm;
+use Wenslijst\Forms\ClaimPresentForm;
 use Wenslijst\Present;
 use Wenslijst\Forms\NewPresentForm;
-use Wenslijst\UI\PresentIcon;
+use Wenslijst\UI\ShoppingcartIcon;
 
 class WenslijstPage extends WenslijstLayout
 {
@@ -23,21 +22,11 @@ class WenslijstPage extends WenslijstLayout
 	{
 		parent::__construct();
 		
-		$this->setTitle("RSVP & Wenslijst");
+		$this->setTitle("Boodschappen registratie");
 		
-		$rsvpForm = new RSVPForm("rsvp");
-		if($rsvpForm->checkAccess()) {
-			$legend = new HtmlElement("legend");
-			$legend->addChild(new Header("Ben je er bij?", "h1", "Vinden we fijn om te weten :)"));
-			$this->addChild($legend);
-			$this->addChild($rsvpForm);
-			$this->addChild(new HtmlElement("hr"));
-		}
-		
-		$this->addChild(new Header("Wenslijst", "h1", "Ideeën voor Jace, Nadine en/of Stef"));
-		$this->addChild(new Alert("Uitleg:", "Hieronder staat een lijst met cadeau's die wij leuk vinden, die je als inspiratie kan gebruiken. Als er iets tussenstaat wat je wilt geven, claim deze dan door op de knop rechts te klikken zodat anderen dat ook niet kopen.", ContextualStyle::info()));
+		$this->addChild(new Header("Boodschappen", "h1", "Deze boodschappen kunnen we nog goed gebruiken op kamp"));
+		$this->addChild(new Alert("Uitleg:", "Hieronder staat een lijst met boodschappen die we goed kunnen gebruiken op het kamp. Als je een van deze spullen mee wilt nemen, claim deze dan door op de knop rechts te klikken zodat anderen dat ook niet kopen.", ContextualStyle::info()));
 		$this->addChild($this->presentsList());
-		$this->addChild(new Paragraph("Kun je hiertussen niks vinden, dan maak je ons ook nog blij met een cadeaubon voor bol.com, hema, kruidvat of de campingwinkel in Eindhoven."));
 		$this->addChild($this->newPresentForm());
 	}
 	
@@ -45,10 +34,10 @@ class WenslijstPage extends WenslijstLayout
 	{
 		$presents = Present::all();
 		if($presents->count() == 0) {
-			return new Alert("Helaas:", "Momenteel is de lijst met ideeen leeg :( Het is mogelijk dat een grapjas alles heeft geclaimed, probeer het binnenkort nog eens of neem rechtstreeks contact met ons op.", ContextualStyle::warning());
+			return new Alert("Helaas:", "Momenteel is de lijst met boodschappen leeg.", ContextualStyle::warning());
 		}
 		$table = new OrmTable($presents);
-		$table->addColumnFunction("Cadeau", function(Present $present) {
+		$table->addColumnFunction("Product", function(Present $present) {
 			if($present->url === null) {
 				return $present->name;
 			} else {
@@ -58,11 +47,10 @@ class WenslijstPage extends WenslijstLayout
 				return $link;
 			}
 		});
-		$table->addColumnFunction("Voor wie?", function(Present $present) { return $present->ontvanger; });
 		$table->addColumnFunction("Details", function(Present $present) { return $present->omschrijving; });
 		$table->addColumnFunction("Claim", function(Present $present) {
-			$modal = new ModalForm(new DeletePresentForm($present));
-			$modal->includeToggleButton("Deze claim ik", new PresentIcon());
+			$modal = new ModalForm(new ClaimPresentForm($present));
+			$modal->includeToggleButton("Neem ik mee", new ShoppingcartIcon());
 			$modal->addCloseButton("Ik denk er nog even over na");
 			return $modal;
 		});

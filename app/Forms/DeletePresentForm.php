@@ -2,9 +2,10 @@
 
 namespace Wenslijst\Forms;
 
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 use Unicorn\Forms\SubmitButton;
 use Unicorn\UI\HTML\Paragraph;
+use Unicorn\Forms\TextInput;
 use Wenslijst\Present;
 
 class DeletePresentForm extends LaravelForm
@@ -14,6 +15,9 @@ class DeletePresentForm extends LaravelForm
 	
 	/** @var Present */
 	private $present;
+
+	/** @var TextInput */
+	private $bever;
 	
 	public function __construct(Present $present, $action = null)
 	{
@@ -23,27 +27,28 @@ class DeletePresentForm extends LaravelForm
 	
 	public function checkAccess(): bool
 	{
-		return true;
+		return Auth::check();
 	}
 	
 	public function title(): string
 	{
-		return "Ik claim dit cadeau!";
+		return "Weg ermee!";
 	}
 	
 	public function form(): void
 	{
-		$this->addChild(new Paragraph("Ga je dit cadeau aanschaffen? Claim hem dan zodat anderen hem niet meer zien."));
+		$this->addChild(new Paragraph("Heb je {$this->present->name} toch niet nodig?"));
+
+		if ($this->present->bever !== null) {
+			$this->addChild(new Paragraph("Vertel je de ouders van {$this->present->bever} ook even dat ze dit niet mee hoeven te geven?"));
+		}
 		
-		$this->button = new SubmitButton($this, "submit", "Dibs!");
+		$this->button = new SubmitButton($this, "submit", "Weg ermee!");
 		$this->setSubmitButton($this->button);
 	}
 	
 	public function handle(): void
 	{
-		$this->present->ip = Request::ip();
-		$this->present->save();
-		
-		$this->present->delete();
+		$this->present->forceDelete();
 	}
 }

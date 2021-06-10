@@ -1,6 +1,6 @@
 <?php
 
-use Wenslijst\Pages\VisitorsPage;
+use Wenslijst\Pages\BooschappenPage;
 use Wenslijst\Pages\WenslijstPage;
 use Wenslijst\Pages\LoginPage;
 
@@ -19,6 +19,6 @@ Route::any('/logout', function () {
 })->name('logout');
 
 
-Route::any('/visitors', function () {
-    return new VisitorsPage();
-})->middleware('auth')->name("visitorList");
+Route::any('/boodschappen', function () {
+    return new BooschappenPage();
+})->middleware('auth')->name("shoppingList");

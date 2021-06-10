@@ -13,7 +13,7 @@ class LoginPage extends WenslijstLayout
 		
 		$this->setTitle("Login");
 		
-		$this->addChild(new Header("Login", "h1", "Alleen voor Stef en Nadine (Jace heeft nog geen account)."));
+		$this->addChild(new Header("Login", "h1", "Alleen voor de beverleiding."));
 		$loginForm = $this->loginForm();
 		$loginForm->noTitle();
 		$this->addChild($loginForm);

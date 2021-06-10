@@ -14,9 +14,6 @@ class NewPresentForm extends LaravelForm
 	private $name;
 	
 	/** @var TextInput */
-	private $ontvanger;
-	
-	/** @var TextInput */
 	private $omschrijving;
 	
 	/** @var TextInput */
@@ -32,23 +29,19 @@ class NewPresentForm extends LaravelForm
 	
 	public function title(): string
 	{
-		return "Cadeau toevoegen";
+		return "Boodschap toevoegen";
 	}
 	
 	public function form(): void
 	{
-		$this->name = new TextInput($this, "name", "Cadeau");
+		$this->name = new TextInput($this, "name", "Naam");
 		$this->ensure(new InputNotEmpty($this->name, "Geef een naam op"));
 		$this->addInput($this->name);
-		
-		$this->ontvanger = new TextInput($this, "ontvanger", "Ontvanger");
-		$this->ensure(new InputNotEmpty($this->ontvanger, "Geef een ontvanger op"));
-		$this->addInput($this->ontvanger);
 		
 		$this->omschrijving = new TextInput($this, "omschrijving", "Omschrijving");
 		$this->addInput($this->omschrijving);
 		
-		$this->url = new TextInput($this, "url", "Link");
+		$this->url = new TextInput($this, "url", "Eventuele link");
 		$this->addInput($this->url);
 		
 		$this->button = new SubmitButton($this, "submit", "Submit");
@@ -59,7 +52,6 @@ class NewPresentForm extends LaravelForm
 	{
 		$present = new Present();
 		$present->name = $this->name->value();
-		$present->ontvanger = $this->ontvanger->value();
 		$present->omschrijving = $this->omschrijving->value();
 		$present->url = ($this->url->value() == "" ? null : $this->url->value());
 		$present->save();

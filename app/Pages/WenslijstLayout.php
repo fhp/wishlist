@@ -9,6 +9,9 @@ use Unicorn\UI\Base\HtmlElement;
 use Unicorn\UI\Bootstrap\BootstrapHtmlPage;
 use Unicorn\UI\Bootstrap\LinkButton;
 use Unicorn\UI\Bootstrap\Navbar;
+use Unicorn\UI\Base\Container;
+use Unicorn\UI\Base\Text;
+use Unicorn\UI\HTML\Header;
 use Unicorn\UI\HTML\Image;
 
 abstract class WenslijstLayout extends BootstrapHtmlPage
@@ -24,7 +27,7 @@ abstract class WenslijstLayout extends BootstrapHtmlPage
 		$bar->brandLink(new Image("img/logo.png"), route("home"));
 		if(Auth::check()) {
 			$bar->addButton(new LinkButton(route("logout"), "logout"), true);
-			$bar->addButton(new LinkButton(route("visitorList"), "bezoekers"), true);
+			$bar->addButton(new LinkButton(route("shoppingList"), "booschappen"), true);
 		} else {
 			$bar->addButton(new LinkButton(route("login"), "login"), true);
 		}

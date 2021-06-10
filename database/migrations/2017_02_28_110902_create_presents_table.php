@@ -16,10 +16,10 @@ class CreatePresentsTable extends Migration
         Schema::create('presents', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name");
-            $table->string("ontvanger");
             $table->string("omschrijving");
             $table->string("url")->nullable();
             $table->ipAddress("ip")->nullable()->default(null);
+            $table->string("bever")->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });
